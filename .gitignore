@@ -66,3 +66,7 @@ nutcracker
 
 Makefile
 Makefile.in
+
+tags
+nohup.out
+nutcracker.yml

@@ -99,6 +99,11 @@ proxy_reuse(struct conn *p)
     case AF_INET:
     case AF_INET6:
         status = nc_set_reuseaddr(p->sd);
+
+        if (status >= 0) {
+            status = nc_set_reuseport(p->sd);
+        }
+
         break;
 
     case AF_UNIX:
@@ -294,7 +299,7 @@ proxy_accept(struct context *ctx, struct conn *p)
                 return NC_OK;
             }
 
-            /* 
+            /*
              * Workaround of https://github.com/twitter/twemproxy/issues/97
              *
              * We should never reach here because the check for conn_ncurr_cconn()
